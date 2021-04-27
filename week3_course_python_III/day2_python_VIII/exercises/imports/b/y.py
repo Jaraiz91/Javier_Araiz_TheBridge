@@ -2,19 +2,14 @@
 import os, sys
 
 ruta = __file__
-for i in range(2):
-    ruta = os.path.dirname(ruta)
-print("-------+++-----")
-print(sys.path)
-sys.path.append(ruta)
-print("--------------")
-print(sys.path)
-import a.x as a
+print(ruta)
+print("------------------")
+print(os.path.dirname(ruta))
+para_path= os.path.dirname(os.path.dirname(ruta))
+sys.path.append(para_path)
+from a.x as a
 
 def fy1(x):
-    a.fx1(x)
-fy1(3)
+    print(a.fx1(x))
 
-def fy2(y):
-    a.fx2(y)
-fy2(6)
+fy1(6)
