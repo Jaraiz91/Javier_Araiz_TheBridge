@@ -4,14 +4,13 @@
 
 **Work-in:**
 
-1. Git
-2. Python VII
+1. Python VIII (imports & classes & lambda)
 
 ---------
 
 **Work-out:**
 
-3. Python exercises
+2. Python exercises
 
 ---------
 

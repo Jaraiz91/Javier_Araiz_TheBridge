@@ -4,14 +4,13 @@
 
 **Work-in:**
 
-1. Git
-2. Python VII
+1. Python IX - functional programming
 
 ---------
 
 **Work-out:**
 
-3. Python exercises
+2. Python exercises
 
 ---------
 
@@ -22,7 +21,6 @@
 *Use Google everytime you need. Google must be your shadow.*
 
 ---------
-
 
 **Lead Instructor**: *Gabriel Vázquez Torres*
 
