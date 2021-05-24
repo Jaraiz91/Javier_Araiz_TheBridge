@@ -39,3 +39,10 @@ def drop_columns_w_many_nans(df, missing_percent):
     df.drop(columns=list_of_cols)
     print(list_of_cols)
     return df
+
+def try_convert_to_int:
+    try:
+        return int(x)
+    except:
+        print("rare value:", x)
+        return x
