@@ -47,7 +47,6 @@ def get_shape():
 def display_image(filename):
     return redirect(url_for("static", filename = filename, code = 301))
 
-
 if __name__ == '__main__':
     # host='127.0.0.1' --> No permite recibir llamadas desde el exterior
     # host='0.0.0.0' --> Permite recibir llamadas desde el exterior

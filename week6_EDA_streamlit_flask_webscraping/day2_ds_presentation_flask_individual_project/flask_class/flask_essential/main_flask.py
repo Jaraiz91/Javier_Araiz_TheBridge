@@ -20,6 +20,7 @@ def greet():
 def create_json():
     return 'Tienes que acceder al endpoint "/give_me_id" pasando por parámetro "password" con la contraseña correcta' 
 
+# localhost:6060/give_me_id?password=12345
 @app.route('/give_me_id', methods=['GET'])
 def give_id():
     x = request.args['password']
@@ -27,6 +28,10 @@ def give_id():
         return request.args
     else:
         return "No es la contraseña correcta"
+
+@app.route("/recibe_informacion")
+def recibe_info():
+    pass 
 
 # ---------- Other functions ----------
 

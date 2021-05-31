@@ -1,5 +1,6 @@
 # función para normalizar los csv que no separa bien las columnas
 from numpy import NaN
+import pandas as pd
 
 
 def normalize_dataframe(dataframe, sep):
@@ -39,5 +40,20 @@ def drop_quot_marks(dataframe, columna):
     dataframe[columna] = serie
     return dataframe
     
+# función para convertir un dataframe en entero
 
+def convert_df_toint(dataframe):
+    for col in dataframe:
+        dataframe[col] = dataframe[col].apply(pd.to_numeric)
         
+    return dataframe
+
+# función para pasar el timeseries a años
+
+def year_timeseries(dataframe):
+    serie = []
+    for val in dataframe.index:
+        val = val.year
+        serie.append(val)
+    dataframe.index = serie
+    return dataframe
