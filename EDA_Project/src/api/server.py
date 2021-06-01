@@ -24,10 +24,10 @@ if args['x'] == 8642:
     # localhost:6060/give_me_id?password=12345
     @app.route('/get_API', methods=['GET'])
     def give_id():
-        x = request.args['password']
+        x = request.args['Token_id']
         if x == "L16092222":
             new_path = path + os.sep + 'Data' + os.sep + 'Def_Data' + os.sep 
-            return cvs_to_json(fullpath= new_path, extension='df_trade_volume')
+            return cvs_to_json(fullpath= new_path, extension='fleet_seatrade')
         else:
             return "No es la contraseña correcta"
 
@@ -62,3 +62,6 @@ if args['x'] == 8642:
 
     if __name__ == "__main__":
         main()
+
+else:
+    print('wrong password')
