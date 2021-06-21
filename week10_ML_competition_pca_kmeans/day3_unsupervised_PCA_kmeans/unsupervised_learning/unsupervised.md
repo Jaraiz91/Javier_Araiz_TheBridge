@@ -30,8 +30,8 @@
 
 *Tutorials*: https://calendly.com/clapiniella
 
-**Teacher Assistant**: *Diomedes Barbero Martinez*
+**Teacher Assistant**: *Borja Puig de la Bellacasa*
 
-- diomedes@thebridgeschool.es
+- borja@thebridgeschool.es
 
-*Tutorials*: https://calendly.com/diomedes
+*Tutorials*: https://calendly.com/borpuig/15min
