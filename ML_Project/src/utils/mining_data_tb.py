@@ -7,13 +7,19 @@ import os, sys
 def merge_csv(base_name, range_number, column_name, file_name, path, start_number= 0):
 
     """" The function saves a csv file with all the csv files you want to join
-    keys:
+    arguments:
     base_name: base name that share all the files in order to make the loop inside the function
     start_number: this number is used in case the file number must start from a number other than one. Default value is 0
     range_number: list or tuple with the start and end numbers to the loop
     column_name: list with the names of the columns
     file_name : desired name for the new file you want to save
-    path: path to folder where the new_file must be stored"""
+    path: path to folder where the new_file must be stored
+    
+    Returns:
+    a new merged csv file
+    
+    """
+    
 
             
 
@@ -53,5 +59,26 @@ def save_merged_csv(csv1, csv2, file_name, path):
     concat_df = pd.concat([df1, df2])
     path_to_file = path + os.sep + file_name + '.csv'
     concat_df.to_csv(path_to_file, header= True, index= False)
+
+    return
+
+def add_features(df, file_name, path):
+
+    """ This function add the features needed for trading time series
+    arguments:
+    df : Dataframe to be used for adding the features
+
+    returns:
+    A saved file of csv modified with the new features
+
+    """
+    df['SMA_5'] = df['Bar CLOSE Bid Quote'].rolling(window=5).mean()
+    df['SMA_20'] = df['Bar CLOSE Bid Quote'].rolling(window=20).mean()
+    df['SMA_200'] = df['Bar CLOSE Bid Quote'].rolling(window=200).mean()
+    df['EMA_20'] = df['Bar CLOSE Bid Quote'].ewm(span=20, min_periods=20, adjust=True).mean()
+
+    path_to_file = path + os.sep + file_name + '.csv'
+
+    df.to_csv(path_to_file, header= True, index= False)
 
     return
