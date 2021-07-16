@@ -82,3 +82,31 @@ def add_features(df, file_name, path):
     df.to_csv(path_to_file, header= True, index= False)
 
     return
+
+def put_features(df):
+
+    df['SMA_5'] = df['Bar CLOSE Bid Quote'].rolling(window=5).mean()
+    df['SMA_20'] = df['Bar CLOSE Bid Quote'].rolling(window=20).mean()
+    df['SMA_200'] = df['Bar CLOSE Bid Quote'].rolling(window=200).mean()
+    df['EMA_20'] = df['Bar CLOSE Bid Quote'].ewm(span=20, min_periods=20, adjust=True).mean()
+
+    return df
+
+def parser(x):
+    """ function to parse object into datetime when reading a csv file"""
+    return datetime.strptime(x, '%Y.%m.%d')
+
+def x_dict_y_dict(data, step):
+    """ Function designed to check if LSTM_preprocessing is doing changes in data as desired"""
+    copy_last = data[-1:]
+    LSTM_df = data[-1:]
+    for i in range(step-1):
+        LSTM_df = pd.concat([LSTM_df, copy_last])
+    LSTM_df = pd.concat([data, LSTM_df])
+    x_list = []
+    y_list = []
+    for i in range(len(data)):
+        D = i + step
+        x_list.append([LSTM_df[x][i:D] for x in data.columns[:]])
+        y_list.append({'date': LSTM_df['Date'][D:D+1], 'time': LSTM_df['Time'][D:D+1], 'close price': LSTM_df['Close Price'][D:D+1]})
+    return x_list, y_list
