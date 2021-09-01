@@ -7,16 +7,20 @@ import argparse
 from sqlalchemy import create_engine
 
 dir = os.path.dirname
+
 path = dir(dir(dir(os.path.abspath(__file__))))
 sys.path.append(path)
+print(path)
 
+from src.utils.apis_tb import cvs_to_json
+from src.utils.apis_tb import read_json
+from src.utils.sql_tb import MySQL as sql
 
     # Mandatory
 app = Flask(__name__)  # __name__ --> __main__  
 
     # ---------- Flask functions ----------
 
-    
 
 @app.route('/')
 def enter():   
@@ -42,7 +46,7 @@ def upload():
 
 
 
-
+print(__name__)
 
 
 
@@ -74,5 +78,6 @@ def main():
         print("Server settings.json doesn't allow to start server. " + 
             "Please, allow it to run it.")
 
-    if __name__ == "__main__":
-        main()
+if __name__ == "__main__":
+    main()
+

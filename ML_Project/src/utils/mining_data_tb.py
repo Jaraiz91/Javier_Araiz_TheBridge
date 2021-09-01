@@ -62,6 +62,25 @@ def save_merged_csv(csv1, csv2, file_name, path):
 
     return
 
+def add_short_features(df, file_name, path):
+    """ This function add the features needed for trading time series
+    arguments:
+    df : Dataframe to be used for adding the features
+
+    returns:
+    A saved file of csv modified with the new features
+
+    """
+    df['SMA_5'] = df['Bar CLOSE Bid Quote'].rolling(window=5).mean()
+    df['SMA_20'] = df['Bar CLOSE Bid Quote'].rolling(window=20).mean()
+    df['EMA_20'] = df['Bar CLOSE Bid Quote'].ewm(span=20, min_periods=20, adjust=True).mean()
+
+    path_to_file = path + os.sep + file_name + '.csv'
+
+    df.to_csv(path_to_file, header= True, index= False)
+
+    return
+
 def add_features(df, file_name, path):
 
     """ This function add the features needed for trading time series
@@ -82,6 +101,37 @@ def add_features(df, file_name, path):
     df.to_csv(path_to_file, header= True, index= False)
 
     return
+def final_add_short_features(df):
+
+    """ This function add the features needed for trading time series
+    arguments:
+    df : Dataframe to be used for adding the features
+
+    returns:
+    A saved file of csv modified with the new features
+
+    """
+    df['SMA_5'] = df['Close price'].rolling(window=5).mean()
+    df['SMA_20'] = df['Close price'].rolling(window=20).mean()
+    df['EMA_20'] = df['Close price'].ewm(span=20, min_periods=20, adjust=True).mean()
+
+    return df
+def final_add_features(df):
+
+    """ This function add the features needed for trading time series
+    arguments:
+    df : Dataframe to be used for adding the features
+
+    returns:
+    A saved file of csv modified with the new features
+
+    """
+    df['SMA_5'] = df['Close price'].rolling(window=5).mean()
+    df['SMA_20'] = df['Close price'].rolling(window=20).mean()
+    df['SMA_200'] = df['Close price'].rolling(window=200).mean()
+    df['EMA_20'] = df['Close price'].ewm(span=20, min_periods=20, adjust=True).mean()
+
+    return df
 
 def put_features(df):
 

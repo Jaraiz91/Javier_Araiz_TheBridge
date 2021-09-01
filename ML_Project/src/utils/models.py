@@ -12,6 +12,46 @@ from tensorflow.keras.callbacks import Callback
 from sklearn.metrics import mean_squared_error, mean_absolute_error
 
 
+        
+
+
+def parse_str_pred_to_float(dataframe):
+    for i in range(len(dataframe['prediction'])):
+        dataframe['prediction'][i] = float(dataframe['prediction'][i][1:-1])
+    return 
+
+
+def test2_preprocessing(data, step):
+    copy_last = data[-1:]
+    LSTM_df = data[-1:]
+    for i in range(step-1):
+        LSTM_df = pd.concat([LSTM_df, copy_last])
+    LSTM_df = pd.concat([data, LSTM_df])
+    x_list = []
+    
+    #for i in range(len(data)):
+        #D = i + step
+    x_list.append([LSTM_df[x][i:step] for x in data.columns[2:]])
+        
+    
+    array_x = np.array(x_list)
+    return array_x
+
+def final_preprocessing(data, step):
+    copy_last = data[-1:]
+    LSTM_df = data[-1:]
+    for i in range(step-1):
+        LSTM_df = pd.concat([LSTM_df, copy_last])
+    LSTM_df = pd.concat([data, LSTM_df])
+    x_list = []
+    
+    for i in range(len(data)):
+        D = i + step
+        x_list.append([LSTM_df[x][i:D] for x in data.columns[1:]])
+        
+    
+    array_x = np.array(x_list)
+    return array_x
 
 def LSTM_preprocessing(data, step, train_size):
     """This function returns the values preprocessed to train a LSTM model
@@ -116,6 +156,16 @@ def build_CNN_model(filters = 64, optimizer = 'adam', embedding = 60 ):
 
     return model
 
+def build_short_CNN_model(filters = 64, optimizer = 'adam', embedding = 60 ):
+    model = Sequential()
+    model.add(Conv1D(filters= filters, kernel_size = 2, activation = 'relu', input_shape= (8, embedding)))
+    model.add(MaxPooling1D(pool_size= 2))
+    model.add(Flatten())
+    model.add(Dense(50, activation = 'relu'))
+    model.add(Dense(1))
+    model.compile(optimizer = 'adam', loss= 'mse')
+
+    return model
 def try_embedding(df, embedding_list):
     for i in embedding_list:
         x_train, x_test, y_train, y_test = LSTM_preprocessing(df, step= i, train_size= 0.5)
